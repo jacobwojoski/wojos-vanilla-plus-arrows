@@ -1,0 +1,13 @@
+{
+  "itemGroup.wojosvanillaplusarrows": "Example Mod Tab",
+  "block.wojosvanillaplusarrows.example_block": "Example Block",
+  "item.wojosvanillaplusarrows.example_item": "Example Item",
+
+  "wojosvanillaplusarrows.configuration.title": "Wojo's Vanilla Plus Arrows Configs",
+  "wojosvanillaplusarrows.configuration.section.wojosvanillaplusarrows.common.toml": "Wojo's Vanilla Plus Arrows Configs",
+  "wojosvanillaplusarrows.configuration.section.wojosvanillaplusarrows.common.toml.title": "Wojo's Vanilla Plus Arrows Configs",
+  "wojosvanillaplusarrows.configuration.items": "Item List",
+  "wojosvanillaplusarrows.configuration.logDirtBlock": "Log Dirt Block",
+  "wojosvanillaplusarrows.configuration.magicNumberIntroduction": "Magic Number Text",
+  "wojosvanillaplusarrows.configuration.magicNumber": "Magic Number"
+}
