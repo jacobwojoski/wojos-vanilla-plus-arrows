@@ -1,7 +1,6 @@
 {
-  "itemGroup.wojosvanillaplusarrows": "Example Mod Tab",
-  "block.wojosvanillaplusarrows.example_block": "Example Block",
-  "item.wojosvanillaplusarrows.example_item": "Example Item",
+  "item.wojosvanillaplusarrows.weeping_vine_arrow": "Weeping Vine Arrow",
+  "item.wojosvanillaplusarrows.glowberry_arrow": "Glow Berry Arrow",
 
   "wojosvanillaplusarrows.configuration.title": "Wojo's Vanilla Plus Arrows Configs",
   "wojosvanillaplusarrows.configuration.section.wojosvanillaplusarrows.common.toml": "Wojo's Vanilla Plus Arrows Configs",
