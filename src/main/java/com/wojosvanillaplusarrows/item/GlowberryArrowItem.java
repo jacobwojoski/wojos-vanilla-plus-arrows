@@ -1,31 +1,31 @@
 package com.wojosvanillaplusarrows.item;
 
-import com.wojosvanillaplusarrows.WojosVanillaPlusArrows;
-import com.wojosvanillaplusarrows.entity.ModEntities;
-import com.wojosvanillaplusarrows.entity.WeepingVineArrowEntity;
+import com.wojosvanillaplusarrows.entity.GlowberryArrowEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.NotNull;
 
 public class GlowberryArrowItem extends ArrowItem {
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(WojosVanillaPlusArrows.MOD_ID);
-
     public GlowberryArrowItem(Item.Properties properties){
         super(properties);
     }
 
     @Override
-    public @NotNull AbstractArrow createArrow(@NotNull Level world, @NotNull ItemStack ammo, @NotNull LivingEntity shooter, ItemStack weapon) {
-        return new WeepingVineArrowEntity(ModEntities.GLOWBERRY_ARROW.get(), shooter, world, weapon,ammo);
+    public AbstractArrow createArrow(Level level, ItemStack ammo, LivingEntity shooter, ItemStack weapon) {
+        return new Arrow(level, shooter, ammo.copyWithCount(1), weapon);
     }
 
-    public static void register(IEventBus eventBus){
-        ITEMS.register(eventBus);
+    @Override
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        Arrow arrow = new Arrow(level, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1), (ItemStack)null);
+        arrow.pickup = AbstractArrow.Pickup.ALLOWED;
+        return arrow;
     }
 }
