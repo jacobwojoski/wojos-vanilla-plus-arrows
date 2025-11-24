@@ -3,10 +3,14 @@ package com.wojosvanillaplusarrows;
 import com.wojosvanillaplusarrows.entity.ModEntities;
 import com.wojosvanillaplusarrows.item.ModItems;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -36,7 +40,7 @@ public class WojosVanillaPlusArrows {
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public WojosVanillaPlusArrows(IEventBus modEventBus, ModContainer modContainer) {
-        ModItems.ITEMS.register(modEventBus);
+        ModItems.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -65,6 +69,13 @@ public class WojosVanillaPlusArrows {
         }
     }
 
+    public static final TagKey<Item> MY_TAG = TagKey.create(
+            // The registry key. The type of the registry must match the generic type of the tag.
+            Registries.ITEM,
+            // The location of the tag. This example will put our tag at data/examplemod/tags/blocks/example_tag.json.
+            ResourceLocation.fromNamespaceAndPath("wojosvanillaplusarrows", "arrowplus")
+    );
+
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
@@ -72,11 +83,16 @@ public class WojosVanillaPlusArrows {
         LOGGER.info("HELLO from server starting");
 
         // Debug check after items are registered
-        LOGGER.info("Server Starting Check Weeping Vine Arrow in arrows tag? " + ModItems.WEEPING_VINE_ARROW.get().builtInRegistryHolder().is(ItemTags.ARROWS));
+        LOGGER.info("Server Starting Check Weeping Vine Arrow in arrows tag? {}",
+                ModItems.WEEPING_VINE_ARROW.get().builtInRegistryHolder().is(ItemTags.ARROWS)
+        );
+
+        LOGGER.info("Weeping vine arrow in arrowPlus tag? {}",
+                ModItems.WEEPING_VINE_ARROW.get().builtInRegistryHolder().is(MY_TAG)
+        );
 
         BuiltInRegistries.ITEM.getTagOrEmpty(ItemTags.ARROWS).forEach(holder -> {
             LOGGER.info("Item in arrows tag: " + BuiltInRegistries.ITEM.getKey(holder.value()));
         });
-
     }
 }
