@@ -22,7 +22,12 @@ public class ModItems {
 
     public static final DeferredHolder<Item, ArrowItem> WEEPING_VINE_ARROW =
             ITEMS.register("weeping_vine_arrow",
-                    () -> new ArrowItem(new Item.Properties())
+                    () -> new WeepingVineArrowItem(new Item.Properties().stacksTo(8))
+            );
+
+    public static final DeferredHolder<Item, ArrowItem> GLOW_BERRY_ARROW =
+            ITEMS.register("glowberry_arrow",
+                    () -> new GlowberryArrowItem(new Item.Properties().stacksTo(8))
             );
 
     // Optional helper method

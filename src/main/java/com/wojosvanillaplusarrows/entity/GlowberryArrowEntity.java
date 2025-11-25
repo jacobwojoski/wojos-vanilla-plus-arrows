@@ -16,29 +16,26 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
+
 public class GlowberryArrowEntity extends AbstractArrow {
 
-    /**
-     * Default Contructor
-     * @param type - Registered entity type when spawning (usually provided by minecraft itself)
-     * @param world - The Minecraft world
-     */
-    public GlowberryArrowEntity(EntityType<? extends AbstractArrow> type, Level world) {
-        super(type, world);
+    public GlowberryArrowEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+        super(entityType, level);
+        this.pickup = Pickup.ALLOWED;
+        this.setBaseDamage(0);
     }
 
-    /**
-     * Glowberry Arrow Contructor
-     * @param type - Registered entity type when spawning (usually provided by minecraft itself)
-     * @param shooter - The entity that shot the arrow (Player, pillage, skelly, etc)
-     * @param instanceLevel - The world the arrow exists in
-     * @param firingWeapon - The firing weapon (Bow, Crossbow)
-     * @param arrowItemStack - The ammo Item / item associated with the arrow (Should be WeepingVineArrowItem)
-     */
-    public GlowberryArrowEntity(EntityType<? extends AbstractArrow> type,
-                                LivingEntity shooter, Level instanceLevel,
-                                ItemStack firingWeapon, ItemStack arrowItemStack) {
-        super(type, shooter, instanceLevel, firingWeapon, arrowItemStack);
+    public GlowberryArrowEntity(EntityType<? extends AbstractArrow> entityType, double x, double y, double z, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+        super(entityType, x, y, z, level, pickupItemStack, firedFromWeapon);
+        this.pickup = Pickup.ALLOWED;
+        this.setBaseDamage(0);
+    }
+
+    public GlowberryArrowEntity(EntityType<? extends AbstractArrow> entityType, LivingEntity owner, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+        super(entityType, owner, level, pickupItemStack, firedFromWeapon);
+        this.pickup = Pickup.ALLOWED;
+        this.setBaseDamage(0);
     }
 
     /* Create the hanging vine when the arrow hits a block */
@@ -53,17 +50,27 @@ public class GlowberryArrowEntity extends AbstractArrow {
             BlockState berryVine = Blocks.CAVE_VINES.defaultBlockState().setValue(CaveVines.BERRIES,true);
 
             BlockPos.MutableBlockPos cursor = impact_position.mutable();
-            int maxLength = 4;
+            // TODO: Set length from config
+            int maxLength = 1;
 
-            for (int i = 0; i < maxLength; i++) {
-                if (instanceLevel.isEmptyBlock(cursor)) {
-                    instanceLevel.setBlock(cursor, berryVine, Block.UPDATE_ALL);
-                    cursor.move(Direction.DOWN);
-                } else {
-                    break; // Stop if vine cannot keep growing
+            // Check for supporting block
+            cursor.move(Direction.UP);
+            //TODO: Check if supporting block is valid (Not water/Plant/Etc)
+            if (!instanceLevel.isEmptyBlock(cursor)){
+                cursor.move(Direction.DOWN,1);
+
+                for (int i = 0; i < maxLength; i++) {
+                    if (instanceLevel.isEmptyBlock(cursor)) {
+                        instanceLevel.setBlock(cursor, berryVine, Block.UPDATE_ALL);
+                        cursor.move(Direction.DOWN);
+                    } else {
+                        break; // Stop if vine cannot keep growing
+                    }
                 }
+                this.discard();
+            }else{
+                // No supporting block, Arrow unused so leave arrow to be picked up
             }
-            this.discard(); // Remove arrow after effect
         }
     }
 
@@ -74,6 +81,6 @@ public class GlowberryArrowEntity extends AbstractArrow {
 
     @Override
     protected @NotNull ItemStack getDefaultPickupItem() {
-        return new ItemStack(ModItems.WEEPING_VINE_ARROW.get());
+        return new ItemStack(ModItems.GLOW_BERRY_ARROW.get());
     }
 }

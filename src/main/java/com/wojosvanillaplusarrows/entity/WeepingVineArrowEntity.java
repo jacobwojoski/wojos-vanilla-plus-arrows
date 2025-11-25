@@ -3,10 +3,15 @@ package com.wojosvanillaplusarrows.entity;
 import com.wojosvanillaplusarrows.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -14,6 +19,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 /**
  * WeepingVineArrowEntity is the arrow entity that is flying through the air when the player
@@ -24,17 +31,23 @@ import org.jetbrains.annotations.NotNull;
  */
 public class WeepingVineArrowEntity extends AbstractArrow {
 
-    /**
-     * Default Contructor
-     * @param type - Registered entity type when spawning (usually provided by minecraft itself)
-     * @param world - The Minecraft world
-     */
-    public WeepingVineArrowEntity(EntityType<? extends AbstractArrow> type, Level world) {
-        super(type, world);
+
+    public WeepingVineArrowEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
+        super(entityType, level);
+        this.pickup = Pickup.ALLOWED;
+        this.setBaseDamage(0);
     }
 
-    public WeepingVineArrowEntity(EntityType<? extends AbstractArrow> type, LivingEntity shooter, Level intanceLevel, ItemStack firingWeapon, ItemStack arrowItemStack) {
-        super(type, shooter, intanceLevel, firingWeapon, arrowItemStack);
+    public WeepingVineArrowEntity(EntityType<? extends AbstractArrow> entityType, double x, double y, double z, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+        super(entityType, x, y, z, level, pickupItemStack, firedFromWeapon);
+        this.pickup = Pickup.ALLOWED;
+        this.setBaseDamage(0);
+    }
+
+    public WeepingVineArrowEntity(EntityType<? extends AbstractArrow> entityType, LivingEntity owner, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+        super(entityType, owner, level, pickupItemStack, firedFromWeapon);
+        this.pickup = Pickup.ALLOWED;
+        this.setBaseDamage(0);
     }
 
     /* Create the hanging vine when the arrow hits a block */
@@ -49,17 +62,26 @@ public class WeepingVineArrowEntity extends AbstractArrow {
             BlockState weepingVine = Blocks.WEEPING_VINES.defaultBlockState();
 
             BlockPos.MutableBlockPos cursor = impact_position.mutable();
-            int maxLength = 15;
+            // TODO: Set length from config
+            int maxLength = 7;
 
-            for (int i = 0; i < maxLength; i++) {
-                if (instanceLevel.isEmptyBlock(cursor)) {
-                    instanceLevel.setBlock(cursor, weepingVine, Block.UPDATE_ALL);
-                    cursor.move(Direction.DOWN);
-                } else {
-                    break; // Stop if vine cannot keep growing
+            // Check for supporting block
+            cursor.move(Direction.UP);
+            //TODO: Check if supporting block is valid (Not water/Plant/Etc)
+            if (!instanceLevel.isEmptyBlock(cursor)) {
+                cursor.move(Direction.DOWN, 1);
+                for (int i = 0; i < maxLength; i++) {
+                    if (instanceLevel.isEmptyBlock(cursor)) {
+                        instanceLevel.setBlock(cursor, weepingVine, Block.UPDATE_ALL);
+                        cursor.move(Direction.DOWN);
+                    } else {
+                        break; // Stop if vine cannot keep growing
+                    }
                 }
+                this.discard(); // Remove arrow after effect
+            }else{
+                // No supporting block, Arrow unused so leave arrow to be picked up
             }
-            this.discard(); // Remove arrow after effect
         }
     }
 

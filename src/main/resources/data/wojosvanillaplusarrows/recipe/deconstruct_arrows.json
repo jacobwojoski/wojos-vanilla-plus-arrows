@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    [
+      {
+        "item": "wojosvanillaplusarrows:glowberry_arrow"
+      },
+      {
+        "item": "wojosvanillaplusarrows:weeping_vine_arrow"
+      }
+    ]
+  ],
+  "result": {
+    "id": "minecraft:arrow",
+    "count": 1
+  }
+}

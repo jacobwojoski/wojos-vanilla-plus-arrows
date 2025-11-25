@@ -1,10 +1,36 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "tag": "minecraft:arrows" }
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    }
   ],
   "result": {
-    "item": "minecraft:diamond",
+    "id": "wojosvanillaplusarrows:weeping_vine_arrow",
     "count": 1
   }
 }
