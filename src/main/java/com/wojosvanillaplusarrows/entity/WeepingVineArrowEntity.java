@@ -26,11 +26,10 @@ import javax.annotation.Nullable;
  * WeepingVineArrowEntity is the arrow entity that is flying through the air when the player
  * shoots a bow.
  *
- * When the entity hits something it tries to create a weeping vine in that location as a vanilla
- * rope ladder
+ * When the entity hits something it tries to create a weeping vine in that location as
+ * the way to make a rope ladder.
  */
 public class WeepingVineArrowEntity extends AbstractArrow {
-
 
     public WeepingVineArrowEntity(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -57,19 +56,21 @@ public class WeepingVineArrowEntity extends AbstractArrow {
         Level instanceLevel = level();
 
         if (!instanceLevel.isClientSide) {
-            BlockPos impact_position = result.getBlockPos().relative(result.getDirection());
-
+            // Block to set air too
             BlockState weepingVine = Blocks.WEEPING_VINES.defaultBlockState();
 
+            // Create cursor to check locations
+            BlockPos impact_position = result.getBlockPos().relative(result.getDirection());
             BlockPos.MutableBlockPos cursor = impact_position.mutable();
-            // TODO: Set length from config
-            int maxLength = 7;
 
-            // Check for supporting block
-            cursor.move(Direction.UP);
-            //TODO: Check if supporting block is valid (Not water/Plant/Etc)
-            if (!instanceLevel.isEmptyBlock(cursor)) {
-                cursor.move(Direction.DOWN, 1);
+            // Get supporting block info
+            // TODO: Check for type of block
+            BlockPos supportBlockPos = cursor.above();
+            BlockState aboveBlockState = instanceLevel.getBlockState(supportBlockPos);
+            boolean canAttach = aboveBlockState.isFaceSturdy(instanceLevel, supportBlockPos, Direction.DOWN);
+            if (canAttach) {
+                // TODO: Set maxLength from config value
+                int maxLength = 7;
                 for (int i = 0; i < maxLength; i++) {
                     if (instanceLevel.isEmptyBlock(cursor)) {
                         instanceLevel.setBlock(cursor, weepingVine, Block.UPDATE_ALL);
