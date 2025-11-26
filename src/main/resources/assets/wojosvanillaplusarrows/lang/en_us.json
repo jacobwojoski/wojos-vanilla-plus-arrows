@@ -1,6 +1,8 @@
 {
   "item.wojosvanillaplusarrows.weeping_vine_arrow": "Weeping Vine Arrow",
-  "item.wojosvanillaplusarrows.glowberry_arrow": "Glow Berry Arrow",
+  "item.wojosvanillaplusarrows.glow_berry_arrow": "Glow Berry Arrow",
+  "item.wojosvanillaplusarrows.ender_pearl_arrow": "Ender Pearl Arrow",
+  "item.wojosvanillaplusarrows.water_source_arrow": "Water Bucket Arrow",
 
   "wojosvanillaplusarrows.configuration.title": "Wojo's Vanilla Plus Arrows Configs",
   "wojosvanillaplusarrows.configuration.section.wojosvanillaplusarrows.common.toml": "Wojo's Vanilla Plus Arrows Configs",
