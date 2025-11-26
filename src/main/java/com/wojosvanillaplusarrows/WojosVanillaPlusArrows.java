@@ -69,6 +69,7 @@ public class WojosVanillaPlusArrows {
             event.accept(ModItems.WEEPING_VINE_ARROW.get());
             event.accept(ModItems.GLOW_BERRY_ARROW.get());
             event.accept(ModItems.ENDER_PEARL_ARROW.get());
+            event.accept(ModItems.WATER_SOURCE_ARROW.get());
         }
     }
 

@@ -28,6 +28,11 @@ public class ModItems {
                     () -> new EnderPearlArrowItem(new Item.Properties().stacksTo(8))
             );
 
+    public static final DeferredHolder<Item, ArrowItem> WATER_SOURCE_ARROW =
+            ITEMS.register("water_source_arrow",
+                    () -> new WaterSourceArrowItem(new Item.Properties().stacksTo(1))
+            );
+
     // Optional helper method
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

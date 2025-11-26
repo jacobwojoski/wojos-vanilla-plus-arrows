@@ -35,24 +35,24 @@ public class EnderPearlArrowEntity extends AbstractArrow {
         super(entityType, level);
         this.pickup = Pickup.ALLOWED;
         this.setBaseDamage(0);
-        playThorowSound();
+        playThrowSound();
     }
 
     public EnderPearlArrowEntity(EntityType<? extends AbstractArrow> entityType, double x, double y, double z, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(entityType, x, y, z, level, pickupItemStack, firedFromWeapon);
         this.pickup = Pickup.ALLOWED;
         this.setBaseDamage(0);
-        playThorowSound();
+        playThrowSound();
     }
 
     public EnderPearlArrowEntity(EntityType<? extends AbstractArrow> entityType, LivingEntity owner, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(entityType, owner, level, pickupItemStack, firedFromWeapon);
         this.pickup = Pickup.ALLOWED;
         this.setBaseDamage(0);
-        playThorowSound();
+        playThrowSound();
     }
 
-    private void playThorowSound(){
+    private void playThrowSound(){
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                 SoundEvents.ENDER_PEARL_THROW,
                 SoundSource.PLAYERS,

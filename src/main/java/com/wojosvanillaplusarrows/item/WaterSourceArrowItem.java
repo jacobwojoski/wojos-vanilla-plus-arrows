@@ -1,7 +1,7 @@
 package com.wojosvanillaplusarrows.item;
 
-import com.wojosvanillaplusarrows.entity.EnderPearlArrowEntity;
-import com.wojosvanillaplusarrows.entity.GlowberryArrowEntity;
+import com.wojosvanillaplusarrows.entity.WaterSourceArrowEntity;
+import com.wojosvanillaplusarrows.entity.WeepingVineArrowEntity;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.world.entity.EntityType;
@@ -14,18 +14,19 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class EnderPearlArrowItem extends ArrowItem {
-    public EnderPearlArrowItem(Properties properties){
+public class WaterSourceArrowItem extends ArrowItem {
+    public WaterSourceArrowItem(Properties properties){
         super(properties);
     }
 
     public AbstractArrow createArrow(Level level, ItemStack ammo, LivingEntity shooter, @Nullable ItemStack weapon) {
-        return new EnderPearlArrowEntity(EntityType.ARROW, shooter, level, ammo.copyWithCount(1), weapon);
+        return new WaterSourceArrowEntity(EntityType.ARROW, shooter, level, ammo.copyWithCount(1), weapon);
     }
 
     public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
-        EnderPearlArrowEntity arrow = new EnderPearlArrowEntity(EntityType.ARROW, pos.x(), pos.y(), pos.z(), level, stack.copyWithCount(1), (ItemStack)null);
+        WaterSourceArrowEntity arrow = new WaterSourceArrowEntity(EntityType.ARROW, pos.x(), pos.y(), pos.z(), level, stack.copyWithCount(1), (ItemStack)null);
         arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
         return arrow;
     }
 }
+

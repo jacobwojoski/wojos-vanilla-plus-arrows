@@ -29,7 +29,7 @@ public class ModEntities {
     );
 
     // -----------------------------
-    //  Glowberry Arrow Entity
+    //  Glow Berry Arrow Entity
     // -----------------------------
     public static final DeferredHolder<EntityType<?>, EntityType<GlowberryArrowEntity>>
             GLOW_BERRY_ARROW_ENTITY = ENTITIES.register("glowberry_arrow_entity",
@@ -44,18 +44,33 @@ public class ModEntities {
         );
 
     // -----------------------------
-    //  Enderpearl Arrow Entity
+    //  Ender Pearl Arrow Entity
     // -----------------------------
-    public static final DeferredHolder<EntityType<?>, EntityType<GlowberryArrowEntity>>
+    public static final DeferredHolder<EntityType<?>, EntityType<EnderPearlArrowEntity>>
             ENDER_PEARL_ARROW_ENTITY = ENTITIES.register("ender_pearl_arrow_entity",
-            () -> EntityType.Builder.<GlowberryArrowEntity>of(
-                            GlowberryArrowEntity::new,
+            () -> EntityType.Builder.<EnderPearlArrowEntity>of(
+                            EnderPearlArrowEntity::new,
                             MobCategory.MISC
                     )
                     .sized(0.5F, 0.5F)       // Arrow size
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .build("ender_pearl_arrow_entity")
+    );
+
+    // -----------------------------
+    //  Water Source Arrow Entity
+    // -----------------------------
+    public static final DeferredHolder<EntityType<?>, EntityType<WaterSourceArrowEntity>>
+            WATER_SOURCE_ARROW_ENTITY = ENTITIES.register("water_source_arrow_entity",
+            () -> EntityType.Builder.<WaterSourceArrowEntity>of(
+                            WaterSourceArrowEntity::new,
+                            MobCategory.MISC
+                    )
+                    .sized(0.5F, 0.5F)       // Arrow size
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+                    .build("water_source_arrow_entity")
     );
 
     // Call this in your main mod constructor

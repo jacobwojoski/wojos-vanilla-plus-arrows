@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "wojosvanillaplusarrows:item/ender_pearl_arrow"
+    "layer0": "wojosvanillaplusarrows:item/water_source_arrow"
   }
 }
