@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "wojosvanillaplusarrows:item/glowberry_arrow"
+    "layer0": "wojosvanillaplusarrows:item/glow_berry_arrow"
   }
 }

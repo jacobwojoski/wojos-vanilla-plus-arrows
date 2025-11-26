@@ -2,8 +2,6 @@ package com.wojosvanillaplusarrows.item;
 
 import com.wojosvanillaplusarrows.WojosVanillaPlusArrows;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
