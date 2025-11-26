@@ -17,7 +17,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    // Weeping arrow configs
+    // ====== - Weeping arrow configs - ======
     public static final ModConfigSpec.BooleanValue IS_WEEPING_ARROW_ENABLED = BUILDER
             .comment("Is the WEEPING ARROW enabled? (DEF: true)")
             .define("isWeepingArrowEnabled", true);
@@ -29,7 +29,7 @@ public class Config {
             .defineInRange("weepingArrowMaxStackSize", 8, 0, 64);
     //TODO: Add craft adjustment configs?
 
-    // Glow Berry Arrow Configs
+    // ====== - Glow Berry Arrow Configs - ======
     public static final ModConfigSpec.BooleanValue IS_GOWBERRY_ARROW_ENABLED = BUILDER
             .comment("Is the GLOWBERRY ARROW enabled? (DEF: true)")
             .define("isGlowberryArrowEnabled", true);
@@ -40,6 +40,14 @@ public class Config {
             .comment("Set the max stack size for Glowberry Arrows (MIN:0, DEF:8, MAX: 64)")
             .defineInRange("glowberryArrowMaxStackSize", 8, 0, 64);
     //TODO: Add craft adjustment configs?
+
+    // ====== - Enderpearl Arrow Configs - ======
+    public static final ModConfigSpec.BooleanValue IS_ENDERPEARL_ARROW_ENABLED = BUILDER
+            .comment("Is the ENDERPEARL ARROW enabled? (DEF: true)")
+            .define("isEnderpearlArrowEnabled", true);
+    public static final ModConfigSpec.IntValue SET_ENDERPEARL_ARROW_STACK_SIZE = BUILDER
+            .comment("Set the max stack size for Enderpearl Arrows (MIN:0, DEF:8, MAX: 64)")
+            .defineInRange("enderpearlArrowMaxStackSize", 8, 0, 64);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
