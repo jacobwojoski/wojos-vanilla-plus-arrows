@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,10 +24,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 /**
- * GlowberryArrowEntity is the arrow entity that is flying through the air when the player
+ * EnderPearlArrowEntity is the arrow entity that is flying through the air when the player
  * shoots a bow.
  *
- * When the entity hits something it tries to create a glowberry vine as a source of light
+ * When the entity hits something it teleports the player to that location.
  */
 public class EnderPearlArrowEntity extends AbstractArrow {
 
@@ -33,24 +35,36 @@ public class EnderPearlArrowEntity extends AbstractArrow {
         super(entityType, level);
         this.pickup = Pickup.ALLOWED;
         this.setBaseDamage(0);
+        playThorowSound();
     }
 
     public EnderPearlArrowEntity(EntityType<? extends AbstractArrow> entityType, double x, double y, double z, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(entityType, x, y, z, level, pickupItemStack, firedFromWeapon);
         this.pickup = Pickup.ALLOWED;
         this.setBaseDamage(0);
+        playThorowSound();
     }
 
     public EnderPearlArrowEntity(EntityType<? extends AbstractArrow> entityType, LivingEntity owner, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(entityType, owner, level, pickupItemStack, firedFromWeapon);
         this.pickup = Pickup.ALLOWED;
         this.setBaseDamage(0);
+        playThorowSound();
+    }
+
+    private void playThorowSound(){
+        this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                SoundEvents.ENDER_PEARL_THROW,
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+        );
     }
 
     /* Create the hanging vine when the arrow hits a block */
     @Override
-    protected void onHitBlock(@NotNull BlockHitResult result) {
-        super.onHitBlock(result);
+    protected void onHit(@NotNull HitResult result) {
+        super.onHit(result);
         Level instanceLevel = level();
 
         if (!instanceLevel.isClientSide) {
@@ -71,15 +85,16 @@ public class EnderPearlArrowEntity extends AbstractArrow {
                         x, y, z, 32,
                         0.5, 1.0, 0.5, 0.1
                 );
-            }
 
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                        SoundEvents.PLAYER_TELEPORT,
+                        SoundSource.PLAYERS,
+                        1.0F,
+                        1.0F
+                );
+            }
             this.discard(); // remove arrow
         }
-    }
-
-    @Override
-    protected void onHit(@NotNull HitResult result) {
-        super.onHit(result);
     }
 
     @Override
