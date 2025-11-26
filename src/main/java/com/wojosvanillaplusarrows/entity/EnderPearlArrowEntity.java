@@ -99,6 +99,6 @@ public class EnderPearlArrowEntity extends AbstractArrow {
 
     @Override
     protected @NotNull ItemStack getDefaultPickupItem() {
-        return new ItemStack(ModItems.GLOW_BERRY_ARROW.get());
+        return new ItemStack(ModItems.ENDER_PEARL_ARROW.get());
     }
 }

@@ -32,7 +32,7 @@ public class ModEntities {
     //  Glowberry Arrow Entity
     // -----------------------------
     public static final DeferredHolder<EntityType<?>, EntityType<GlowberryArrowEntity>>
-            GLOWBERRY_ARROW_ENTITY = ENTITIES.register("glowberry_arrow_entity",
+            GLOW_BERRY_ARROW_ENTITY = ENTITIES.register("glowberry_arrow_entity",
             () -> EntityType.Builder.<GlowberryArrowEntity>of(
                         GlowberryArrowEntity::new,
                         MobCategory.MISC
@@ -40,14 +40,14 @@ public class ModEntities {
                 .sized(0.5F, 0.5F)       // Arrow size
                 .clientTrackingRange(4)
                 .updateInterval(20)
-                .build("glowberry_arrow_entity")
+                .build("glow_berry_arrow_entity")
         );
 
     // -----------------------------
     //  Enderpearl Arrow Entity
     // -----------------------------
     public static final DeferredHolder<EntityType<?>, EntityType<GlowberryArrowEntity>>
-            ENDERPEARL_ARROW_ENTITY = ENTITIES.register("enderpearl_arrow_entity",
+            ENDER_PEARL_ARROW_ENTITY = ENTITIES.register("ender_pearl_arrow_entity",
             () -> EntityType.Builder.<GlowberryArrowEntity>of(
                             GlowberryArrowEntity::new,
                             MobCategory.MISC
@@ -55,7 +55,7 @@ public class ModEntities {
                     .sized(0.5F, 0.5F)       // Arrow size
                     .clientTrackingRange(4)
                     .updateInterval(20)
-                    .build("enderpearl_arrow_entity")
+                    .build("ender_pearl_arrow_entity")
     );
 
     // Call this in your main mod constructor

@@ -21,12 +21,12 @@ public class ModItems {
             );
 
     public static final DeferredHolder<Item, ArrowItem> GLOW_BERRY_ARROW =
-            ITEMS.register("glowberry_arrow",
+            ITEMS.register("glow_berry_arrow",
                     () -> new GlowberryArrowItem(new Item.Properties().stacksTo(8))
             );
 
-    public static final DeferredHolder<Item, ArrowItem> ENDERPEARL_ARROW =
-            ITEMS.register("enderpearl_arrow",
+    public static final DeferredHolder<Item, ArrowItem> ENDER_PEARL_ARROW =
+            ITEMS.register("ender_pearl_arrow",
                     () -> new EnderPearlArrowItem(new Item.Properties().stacksTo(8))
             );
 

@@ -40,6 +40,7 @@ public class WojosVanillaPlusArrows {
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public WojosVanillaPlusArrows(IEventBus modEventBus, ModContainer modContainer) {
+        ModEntities.register(modEventBus);
         ModItems.register(modEventBus);
 
         // Register the commonSetup method for modloading
@@ -66,6 +67,8 @@ public class WojosVanillaPlusArrows {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.WEEPING_VINE_ARROW.get());
+            event.accept(ModItems.GLOW_BERRY_ARROW.get());
+            event.accept(ModItems.ENDER_PEARL_ARROW.get());
         }
     }
 
